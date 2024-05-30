@@ -1,0 +1,12 @@
+management:
+  info:
+    git:
+      enabled: true
+      mode: full
+  endpoint:
+    health:
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include: prometheus

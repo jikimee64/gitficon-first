@@ -1,0 +1,9 @@
+rootProject.name = 'ordersystem'
+
+include 'core:core-enum'
+include 'core:core-api'
+include 'storage:db-core'
+include 'support:logging'
+include 'support:monitoring'
+include 'clients:clients-external-api'
+
