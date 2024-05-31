@@ -18,6 +18,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
+#      - name: db-core.yml 파일 만들기
+#        run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./storage/db-core/src/main/resources/db-core.yml
+
       - name: db-core.yml 파일 만들기
         run: printf "%s" "${{ secrets.APPLICATION_PROPERTIES }}" > ./storage/db-core/src/main/resources/db-core.yml
 
