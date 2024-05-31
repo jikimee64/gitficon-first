@@ -34,9 +34,9 @@ jobs:
         run: mv ./core/core-api/build/libs/app.jar ./app.jar
 
         # $GITHUB_SHA는 는 커밋 ID
-        # tar.gz , appspect.yml, scripts 폴더를 압축
+        # app.jar , appspect.yml, scripts 폴더를 압축
       - name: 압축하기
-        run: tar -czvf $GITHUB_SHA.tar.gz project.jar appspec.yml scripts
+        run: tar -czvf $GITHUB_SHA.tar.gz app.jar appspec.yml scripts
 
       - name: AWS Resource에 접근할 수 있게 AWS credentials 설정
         uses: aws-actions/configure-aws-credentials@v4
