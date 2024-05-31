@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### yml
+storage/db-core/src/main/resources/db-core.yml
