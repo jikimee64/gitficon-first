@@ -1,14 +1,10 @@
 name: CI
-#
+
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'core/core-api/**'
   pull_request:
     branches: [ "main" ]
-    paths:
-      - 'core/core-api/**'
 
 jobs:
   build:
