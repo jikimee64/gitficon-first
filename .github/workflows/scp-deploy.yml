@@ -24,6 +24,9 @@ jobs:
       - name: 테스트 및 빌드하기
         run: ./gradlew core:core-api:clean core:core-api:build
 
+      - name: 빌드된 파일 이름 변경하기
+        run: mv ./core/core-api/build/libs/app.jar ./app.jar
+
       - name: SCP로 EC2에 빌드된 파일 전송하기
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -32,3 +35,19 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           source: app.jar
           target: /home/ubuntu/order-system/tobe
+
+      - name: SSH로 EC2에 접속하기
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            rm -rf /home/ubuntu/order-system/current
+            mkdir /home/ubuntu/order-system/current
+            mv /home/ubuntu/order-system/tobe/app.jar /home/ubuntu/order-system/current/app.jar
+            cd /home/ubuntu/order-system/current
+            sudo fuser -k -n tcp 8080 || true
+            nohup java -jar app.jar > ./output.log 2>&1 & 
+            rm -rf /home/ubuntu/order-system/tobe
