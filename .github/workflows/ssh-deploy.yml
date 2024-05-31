@@ -21,6 +21,7 @@ jobs:
           script_stop: true # 아래 script 중 실패하는 명령이 하나라도 있으면 실패로 처리
           script: |
             cd /home/ubuntu/order-system # 여기 경로는 자신의 EC2에 맞는 경로로 재작성하기
+            rm -rf storage/db-core/src/main/resources/db-core.yml
             git pull origin main
             echo "$APPLICATION_PROPERTIES" > storage/db-core/src/main/resources/db-core.yml
             ./gradlew core:core-api:build
