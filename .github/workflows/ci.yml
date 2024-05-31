@@ -23,6 +23,4 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run gradle build
-        run: |
-          cd ordersystem
-          ./gradlew clean :core/core-api:buildNeeded --stacktrace --info --refresh-dependencies -x test
+        run: ./gradlew clean :core:core-api:buildNeeded --stacktrace --info --refresh-dependencies -x test
