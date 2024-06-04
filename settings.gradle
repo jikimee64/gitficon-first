@@ -1,6 +1,5 @@
-rootProject.name = 'ordersystem'
+rootProject.name = 'order-system'
 
-include 'core:core-enum'
 include 'core:core-api'
 include 'storage:db-core'
 include 'support:logging'
