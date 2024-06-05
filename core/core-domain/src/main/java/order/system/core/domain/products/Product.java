@@ -1,4 +1,4 @@
-package order.system.core.domain;
+package order.system.core.domain.products;
 
 import java.util.Objects;
 

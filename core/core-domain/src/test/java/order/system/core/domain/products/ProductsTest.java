@@ -1,4 +1,4 @@
-package order.system.core.domain;
+package order.system.core.domain.products;
 
 import order.system.core.domain.user.AnonymousUser;
 import order.system.core.domain.user.LoginUser;
