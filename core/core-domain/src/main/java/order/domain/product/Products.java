@@ -1,7 +1,7 @@
-package order.system.db.core.product;
+package order.domain.product;
 
-import order.system.db.core.user.LoginUser;
-import order.system.db.core.user.User;
+import order.domain.user.LoginUser;
+import order.domain.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

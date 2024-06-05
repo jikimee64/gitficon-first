@@ -1,4 +1,4 @@
-package order.system.db.core.product;
+package order.domain.product;
 
 import java.util.Objects;
 

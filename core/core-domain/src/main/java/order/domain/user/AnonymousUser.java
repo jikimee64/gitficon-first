@@ -1,4 +1,4 @@
-package order.system.db.core.user;
+package order.domain.user;
 
 public class AnonymousUser extends User {
 

@@ -1,9 +1,9 @@
 package order.system.db.core;
 
-import order.system.db.core.product.AddProduct;
-import order.system.db.core.product.Product;
-import order.system.db.core.product.Products;
-import order.system.db.core.user.LoginUser;
+import order.system.product.AddProduct;
+import order.system.product.Product;
+import order.system.product.Products;
+import order.system.user.LoginUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
