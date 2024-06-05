@@ -1,4 +1,4 @@
-package order.domain.product;
+package order.system.core.domain;
 
 public record AddProduct(
         Long productId,
