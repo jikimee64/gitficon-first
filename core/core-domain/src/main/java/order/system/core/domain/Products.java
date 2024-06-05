@@ -26,11 +26,14 @@ public class Products {
                 .orElseThrow(() -> new IllegalArgumentException("해당 제품이 존재하지 않아 제품을 구매할 수 없습니다."));
     }
 
-    public void selectProducts(User user) {
-
+    public List<Product> selectProducts(User user) {
+        return products;
     }
 
-    public void selectProduct(User user, Product product) {
-
+    public Product selectProduct(User user, long productId) {
+        return products.stream()
+                .filter(product -> product.getProductId().equals(productId))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("해당 제품이 존재하지 않아 제품을 구매할 수 없습니다."));
     }
 }

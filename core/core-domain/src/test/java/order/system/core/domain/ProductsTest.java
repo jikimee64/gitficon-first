@@ -1,6 +1,8 @@
 package order.system.core.domain;
 
+import order.system.core.domain.user.AnonymousUser;
 import order.system.core.domain.user.LoginUser;
+import order.system.core.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,6 +53,82 @@ class ProductsTest {
 
         assertThatThrownBy(() -> {
             products.purchaseProduct(loginUser, addProduct.productId());
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("해당 제품이 존재하지 않아 제품을 구매할 수 없습니다.");
+    }
+
+    @Test
+    void 회원은_제품을_조회할_수_있다() {
+        LoginUser loginUser = new LoginUser(userId);
+        AddProduct addProduct = new AddProduct(1L, "제품");
+
+        products.addProducts(loginUser, addProduct);
+
+        assertThat(products.selectProducts(loginUser)).hasSize(1)
+                .extracting("userId", "name")
+                .containsExactly(
+                        tuple(1L, "제품")
+                );
+    }
+
+    @Test
+    void 회원은_제품을_상세_조회할_수_있다() {
+        LoginUser loginUser = new LoginUser(userId);
+        AddProduct addProduct = new AddProduct(1L, "제품");
+
+        products.addProducts(loginUser, addProduct);
+
+        assertThat(products.selectProduct(loginUser, addProduct.productId()))
+                .extracting("userId", "name")
+                .containsExactly(1L, "제품");
+    }
+
+    @Test
+    void 회원은_없는_제품인_경우_상세_조회할_수_없다() {
+        LoginUser loginUser = new LoginUser(userId);
+
+        assertThatThrownBy(() -> {
+            products.selectProduct(loginUser, 1L);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("해당 제품이 존재하지 않아 제품을 구매할 수 없습니다.");
+    }
+
+    @Test
+    void 비회원은_제품을_조회할_수_있다() {
+        LoginUser loginUser = new LoginUser(userId);
+        AddProduct addProduct = new AddProduct(1L, "제품");
+        products.addProducts(loginUser, addProduct);
+
+        User anonymousUser = new AnonymousUser();
+
+        assertThat(products.selectProducts(anonymousUser)).hasSize(1)
+                .extracting("userId", "name")
+                .containsExactly(
+                        tuple(1L, "제품")
+                );
+    }
+
+    @Test
+    void 비회원은_제품을_상세_조회할_수_있다() {
+        LoginUser loginUser = new LoginUser(userId);
+        AddProduct addProduct = new AddProduct(1L, "제품");
+        products.addProducts(loginUser, addProduct);
+
+        User anonymousUser = new AnonymousUser();
+
+        assertThat(products.selectProduct(anonymousUser, addProduct.productId()))
+                .extracting("userId", "name")
+                .containsExactly(1L, "제품");
+    }
+
+    @Test
+    void 비회원은_없는_제품인_경우_상세_조회할_수_없다() {
+        LoginUser loginUser = new LoginUser(userId);
+
+        User anonymousUser = new AnonymousUser();
+
+        assertThatThrownBy(() -> {
+            products.selectProduct(anonymousUser, 1L);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("해당 제품이 존재하지 않아 제품을 구매할 수 없습니다.");
     }
