@@ -1,12 +1,22 @@
 management:
+  server:
+    port: 9292
   info:
     git:
       enabled: true
       mode: full
   endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
     health:
       show-components: always
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: health, info, metrics, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
